@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import { ButtonGroup, Button } from 'react-bootstrap';
 import './App.css';
+import Card from './components/Card/Card';
 
 function App() {
+  const items = [
+    { name: 'sogir uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
+    { name: 'polash uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
+    { name: 'bahar uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
+    { name: 'jamil uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
+    { name: 'kabil uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
+  ]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="row row-cols-1 row-cols-md-3 g-4">
+      {
+        items.map(item => <Card item={item}></Card>)
+      }
     </div>
   );
 }
