@@ -1,20 +1,29 @@
-import { ButtonGroup, Button } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { ButtonGroup, Button, Row, Col, CardGroup, Spinner } from 'react-bootstrap';
 import './App.css';
-import Card from './components/Card/Card';
+import News from './components/News/News';
 
 function App() {
-  const items = [
-    { name: 'sogir uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
-    { name: 'polash uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
-    { name: 'bahar uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
-    { name: 'jamil uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
-    { name: 'kabil uddin', description: 'slkhf;klshflfks', img: 'https://www.collinsdictionary.com/images/full/park_523559155_1000.jpg' },
-  ]
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    fetch('https://newsapi.org/v2/everything?q=tesla&from=2021-08-28&sortBy=publishedAt&apiKey=dfbf3be53c5b4002a87b59600fce1d38')
+      .then(res => res.json())
+      .then(data => setNews(data.articles))
+  }, [])
   return (
-    <div className="row row-cols-1 row-cols-md-3 g-4">
+    <div>
       {
-        items.map(item => <Card item={item}></Card>)
+        news.length === 0 ?
+          <Spinner animation="border" />
+          :
+          <Row xs={1} md={3} className="g-4">
+            {
+              news.map(NW => <News NW={NW}></News>)
+            }
+          </Row>
       }
+
     </div>
   );
 }
